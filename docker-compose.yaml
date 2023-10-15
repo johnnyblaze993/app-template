@@ -1,3 +1,5 @@
+# SNAPSHOT VERSION
+
 version: "3.8"
 
 services:
@@ -16,12 +18,12 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "7000:5173"
+      - "7001:5173"
     depends_on:
       - backend
 
   backend:
-    build: ./backend
+    build: ./server
     ports:
       - "8080:8080"
     environment:
@@ -33,3 +35,44 @@ services:
 
 volumes:
   postgres-data:
+# # BIND MOUNTED VERSION
+# version: "3.8"
+
+# services:
+#   postgres:
+#     image: postgres:13
+#     volumes:
+#       - ./db-init:/docker-entrypoint-initdb.d
+#       - postgres-data:/var/lib/postgresql/data
+#     environment:
+#       POSTGRES_DB: digimondb
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: mysecretpassword
+
+#   frontend:
+#     build:
+#       context: ./frontend
+#       dockerfile: Dockerfile
+#     ports:
+#       - "7001:5173"
+#     volumes:
+#       - ./frontend:/app # Bind mount for real-time code changes
+#     depends_on:
+#       - backend
+
+#   backend:
+#     build: ./server
+#     ports:
+#       - "8080:8080"
+#     environment:
+#       DATASOURCES_DEFAULT_URL: jdbc:postgresql://postgres:5432/digimondb
+#       DATASOURCES_DEFAULT_USERNAME: postgres
+#       DATASOURCES_DEFAULT_PASSWORD: mysecretpassword
+#     volumes:
+#       - ./server:/app # Bind mount for real-time code changes
+#     Command: ["java", "-jar", "/app/server.jar"]
+#     depends_on:
+#       - postgres
+
+# volumes:
+#   postgres-data:

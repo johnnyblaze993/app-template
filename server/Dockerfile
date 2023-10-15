@@ -7,5 +7,6 @@ RUN chmod +x /wait-for-it.sh
 WORKDIR /app
 COPY ./build/libs/server-0.1-all.jar /app/server.jar
 EXPOSE 8080
-CMD ["/wait-for-it.sh", "db:5432", "--", "java", "-jar", "/app/server.jar"]
+CMD ["/wait-for-it.sh", "postgres:5432", "--", "java", "-jar", "/app/server.jar"]
+
 

@@ -8,7 +8,6 @@ micronaut:
         web:
           allowed-origins:
             - "http://localhost:5173"
-            # - "http://localhost:3000" -> for presentation compose file
           allowed-methods:
             - GET
             - POST
@@ -17,8 +16,7 @@ micronaut:
           allowed-headers:
             - Authorization
             - Content-Type
-          exposed-headers:
-            - Authorization
+            - X-Requested-With
   security:
     enabled: false
     authentication: bearer
